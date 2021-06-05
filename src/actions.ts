@@ -1,5 +1,9 @@
 import { Point } from "./types"
 
+export const BEGIN_STROKE = "BEGIN_STROKE"
+export const UPDATE_STROKE = "UPDATE_STROKE"
+export const END_STROKE = "END_STROKE"
+
 export type Action =
   | {
     type: typeof BEGIN_STROKE
@@ -17,9 +21,6 @@ export type Action =
 // - UPDATE_STROKE - this action will be dispatched when the user moves the pressed mouse. It also contains the coordinates.
 // - END_STROKE - dispatch this action when the user releases the mouse.
 
-export const BEGIN_STROKE = "BEGIN_STROKE"
-export const UPDATE_STROKE = "UPDATE_STROKE"
-export const END_STROKE = "END_STROKE"
 
 export const beginStroke = (x: number, y: number) => {
   return { type: BEGIN_STROKE, payload: { x, y } }
