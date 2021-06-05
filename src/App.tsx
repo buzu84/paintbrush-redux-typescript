@@ -80,12 +80,20 @@ export const App = () => {
   }
 
   return (
-    <canvas
-      ref={canvasRef}
-      onMouseDown={startDrawing}
-      onMouseUp={endDrawing}
-      onMouseOut={endDrawing}
-      onMouseMove={draw}
-    />
+    <div className="window">
+      <div className="title-bar">
+        <div className="title-bar-text">Redux Typescript Paint</div>
+        <div className="title-bar-controls">
+          <button aria-label="Close" />
+        </div>
+      </div>
+      <canvas
+        ref={canvasRef}
+        onMouseDown={startDrawing}
+        onMouseUp={endDrawing}
+        onMouseOut={endDrawing}
+        onMouseMove={draw}
+      />
+    </div>
   )
 }
