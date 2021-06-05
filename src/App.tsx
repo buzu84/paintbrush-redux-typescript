@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 
 export const App = () => {
-  return null;
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  return <canvas ref={canvasRef} />
 }
