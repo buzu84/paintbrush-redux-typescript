@@ -1,10 +1,18 @@
-type RootState = {}
-type Action = {
-  type: string
+import { RootState } from './types'
+import { Action } from './actions'
+
+const initialState: RootState = {
+  currentStroke: { points: [], color: "#000" },
+  strokes: [],
+  historyIndex: 0
 }
+
 export const rootReducer = (
-  state: RootState = {},
+  state: RootState = initialState,
   action: Action
 ) => {
-  return state
+  switch (action.type) {
+    default:
+      return state
+  }
 }

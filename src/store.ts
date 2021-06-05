@@ -9,4 +9,4 @@ export const store = createStore(
   composeWithDevTools(applyMiddleware(logger))
 )
 
-store.dispatch({type: "TEST_ACTION"})
+// store.dispatch({type: "TEST_ACTION"})
