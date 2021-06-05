@@ -4,6 +4,7 @@ import { currentStrokeSelector } from './selectors'
 import { beginStroke, endStroke, updateStroke } from './actions'
 import { drawStroke, clearCanvas, setCanvasSize } from './canvasUtils'
 import { RootState } from './types'
+import { ColorPanel } from './ColorPanel'
 
 const WIDTH = 1024
 const HEIGHT = 768
@@ -94,6 +95,7 @@ export const App = () => {
         onMouseOut={endDrawing}
         onMouseMove={draw}
       />
+      <ColorPanel />
     </div>
   )
 }
