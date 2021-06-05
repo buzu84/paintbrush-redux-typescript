@@ -22,10 +22,15 @@ export const App = () => {
     const { offsetX, offsetY } = nativeEvent
     dispatch(beginStroke(offsetX, offsetY))
   }
-
-  const endDrawing = () => { }
+  // mouse up and mouse out event handler-stop drawing when release the button, mouse leaves the canvas area
+  const endDrawing = () => {
+    if (isDrawing) {
+      dispatch(endStroke())
+    }
+  }
 
   // move event in the draw handler. isDrawing flag to check that the mouse is pressed
+  // If the mouse is moved while pressed, dispatch the UPDATE_STROKE action with the updated coordinates.
   const draw = ({
     nativeEvent
   }: React.MouseEvent<HTMLCanvasElement>
