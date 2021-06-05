@@ -11,6 +11,9 @@ export const App = () => {
   // if there is at least one point in the current stroke points array-drawing has started
   // converting the current stroke points array length to a boolean
   const isDrawing = !!currentStroke.points.length
+  const getCanvasWithContext = (canvas = canvasRef.current) => {
+    return { canvas, context: canvas?.getContext("2d") }
+  }
 
   const dispatch = useDispatch()
 
