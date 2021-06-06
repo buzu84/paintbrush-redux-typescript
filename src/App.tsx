@@ -5,6 +5,7 @@ import { beginStroke, endStroke, updateStroke } from './actions'
 import { drawStroke, clearCanvas, setCanvasSize } from './canvasUtils'
 import { RootState } from './types'
 import { ColorPanel } from './ColorPanel'
+import { EditPanel } from './EditPanel'
 
 const WIDTH = 1024
 const HEIGHT = 768
@@ -17,6 +18,14 @@ export const App = () => {
     RootState,
     RootState["currentStroke"]
   >(currentStrokeSelector)
+
+  const historyIndex = useSelector<RootState, RootState["historyIndex"]>(
+    (state) => state.historyIndex
+  )
+  const strokes = useSelector<RootState, RootState["strokes"]>(
+    (state: RootState) => state.strokes
+  )
+
   // if there is at least one point in the current stroke points array-drawing has started
   // converting the current stroke points array length to a boolean
   const isDrawing = !!currentStroke.points.length
@@ -51,6 +60,21 @@ export const App = () => {
 
     clearCanvas(canvas)
   }, [])
+
+  useEffect(() => {
+    const { canvas, context } = getCanvasWithContext()
+    if (!context || !canvas) {
+      return
+    }
+    requestAnimationFrame(() => {
+      clearCanvas(canvas)
+
+      strokes.slice(0, strokes.length - historyIndex).forEach((stroke) => {
+        drawStroke(context, stroke.points, stroke.color)
+      })
+    })
+  }, [historyIndex])
+
 
   // mouse press event handler-make it dispatch the BEGIN_STROKE action.
   // mouse coordinates from the offsetX and offsetY fields of the nativeEvent and pass them with the action
@@ -95,6 +119,7 @@ export const App = () => {
         onMouseOut={endDrawing}
         onMouseMove={draw}
       />
+      <EditPanel />
       <ColorPanel />
     </div>
   )

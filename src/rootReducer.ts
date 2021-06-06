@@ -4,7 +4,9 @@ import {
   UPDATE_STROKE,
   BEGIN_STROKE,
   END_STROKE,
-  SET_STROKE_COLOR
+  SET_STROKE_COLOR,
+  UNDO,
+  REDO
 } from './actions'
 
 const initialState: RootState = {
@@ -44,11 +46,14 @@ export const rootReducer = (
       if (!state.currentStroke.points.length) {
         return state
       }
-      return {
+      const historyLimit = state.strokes.length - state.historyIndex
+      const newState = {
         ...state,
+        historyIndex: 0,
         currentStroke: { ...state.currentStroke, points: [] },
-        strokes: [...state.strokes, state.currentStroke]
+        strokes: [...state.strokes.slice(0, historyLimit), state.currentStroke]
       }
+      return newState
     }
 
     case SET_STROKE_COLOR: {
@@ -59,6 +64,17 @@ export const rootReducer = (
           ...{ color: action.payload }
         }
       }
+    }
+    case UNDO: {
+      const historyIndex = Math.min(
+        state.historyIndex + 1,
+        state.strokes.length
+      )
+      return { ...state, historyIndex }
+    }
+    case REDO: {
+      const historyIndex = Math.max(state.historyIndex - 1, 0)
+      return { ...state, historyIndex }
     }
 
     default:
