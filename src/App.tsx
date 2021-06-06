@@ -6,6 +6,7 @@ import { drawStroke, clearCanvas, setCanvasSize } from './canvasUtils'
 import { RootState } from './types'
 import { ColorPanel } from './ColorPanel'
 import { EditPanel } from './EditPanel'
+import { historyIndexSelector } from './modules/historyIndex/selectors'
 
 const WIDTH = 1024
 const HEIGHT = 768
@@ -20,8 +21,9 @@ export const App = () => {
   >(currentStrokeSelector)
 
   const historyIndex = useSelector<RootState, RootState["historyIndex"]>(
-    (state) => state.historyIndex
+    historyIndexSelector
   )
+  
   const strokes = useSelector<RootState, RootState["strokes"]>(
     (state: RootState) => state.strokes
   )
@@ -73,7 +75,7 @@ export const App = () => {
         drawStroke(context, stroke.points, stroke.color)
       })
     })
-  }, [historyIndex])
+  }, [historyIndexSelector])
 
 
   // mouse press event handler-make it dispatch the BEGIN_STROKE action.

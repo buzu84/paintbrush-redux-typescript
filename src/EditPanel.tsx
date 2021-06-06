@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch } from "react-redux"
-import { undo, redo } from "./actions"
+// import { undo, redo } from "./modules/historyIndex/actions"
 
 export const EditPanel = () => {
     const dispatch = useDispatch()
@@ -14,13 +14,13 @@ export const EditPanel = () => {
                 <div className="field-row">
                     <button
                         className="button redo"
-                        onClick={() => dispatch(undo())}
+                        // onClick={() => dispatch(undo())}
                     >
                         Undo
     </button>
                     <button
                         className="button undo"
-                        onClick={() => dispatch(redo())}
+                        // onClick={() => dispatch(redo())}
                     >
                         Redo
     </button>

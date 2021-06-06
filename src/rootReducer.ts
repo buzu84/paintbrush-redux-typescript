@@ -5,9 +5,13 @@ import {
   BEGIN_STROKE,
   END_STROKE,
   SET_STROKE_COLOR,
+
+} from './actions'
+
+import {
   UNDO,
   REDO
-} from './actions'
+} from './modules/historyIndex/actions'
 
 const initialState: RootState = {
   currentStroke: { points: [], color: "#000" },
@@ -64,17 +68,6 @@ export const rootReducer = (
           ...{ color: action.payload }
         }
       }
-    }
-    case UNDO: {
-      const historyIndex = Math.min(
-        state.historyIndex + 1,
-        state.strokes.length
-      )
-      return { ...state, historyIndex }
-    }
-    case REDO: {
-      const historyIndex = Math.max(state.historyIndex - 1, 0)
-      return { ...state, historyIndex }
     }
 
     default:

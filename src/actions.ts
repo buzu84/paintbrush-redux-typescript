@@ -4,8 +4,7 @@ export const BEGIN_STROKE = "BEGIN_STROKE"
 export const UPDATE_STROKE = "UPDATE_STROKE"
 export const END_STROKE = "END_STROKE"
 export const SET_STROKE_COLOR = "SET_STROKE_COLOR"
-export const REDO = "REDO"
-export const UNDO = "UNDO"
+
 
 export type Action =
   | {
@@ -23,12 +22,7 @@ export type Action =
     type: typeof SET_STROKE_COLOR
     payload: string
   }
-  | {
-    type: typeof UNDO
-  }
-  | {
-    type: typeof REDO
-  }
+  
 
 // - BEGIN_STROKE - dispatch this action when the user presses the mouse button. It will contain the coordinates in the payload.
 // - UPDATE_STROKE - this action will be dispatched when the user moves the pressed mouse. It also contains the coordinates.
@@ -49,10 +43,3 @@ export const setStrokeColor = (color: string) => {
   return { type: SET_STROKE_COLOR, payload: color }
 }
 
-export const undo = () => {
-  return { type: UNDO }
-}
-
-export const redo = () => {
-  return { type: REDO }
-}
