@@ -45,13 +45,13 @@ export const ColorPanel = () => {
       <div className="title-bar">
         <div className="title-bar-text">Colors</div>
       </div>
-      <div className="window-body colors" style={{display: 'flex', justifyContent: 'space-around'}}>
+      <div className="window-body colors" style={{ display: 'flex', justifyContent: 'space-around' }}>
         {COLORS.map((color: string) => (
           <div
             key={color}
             onClick={() => { onColorChange(color) }}
             className="color"
-            style={{ backgroundColor: color, width: '30px', height: '30px'}}
+            style={{ backgroundColor: color, width: '30px', height: '30px' }}
           ></div>
         ))}
       </div>
