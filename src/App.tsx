@@ -1,11 +1,13 @@
 import React, { useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { currentStrokeSelector } from './selectors'
-import { beginStroke, endStroke, updateStroke } from './actions'
+import { beginStroke, endStroke, updateStroke } from './modules/currentStroke/actions'
 import { drawStroke, clearCanvas, setCanvasSize } from './canvasUtils'
 import { RootState } from './types'
 import { ColorPanel } from './ColorPanel'
 import { EditPanel } from './EditPanel'
+import { historyIndexSelector } from './modules/historyIndex/selectors'
+import { currentStrokeSelector } from './modules/currentStroke/selectors'
+import { strokesSelector } from './modules/strokes/selectors'
 
 const WIDTH = 1024
 const HEIGHT = 768
@@ -14,16 +16,16 @@ const HEIGHT = 768
 export const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const currentStroke = useSelector<
-    RootState,
-    RootState["currentStroke"]
-  >(currentStrokeSelector)
+  const currentStroke = useSelector<RootState, RootState["currentStroke"]>(
+    currentStrokeSelector
+  )
 
   const historyIndex = useSelector<RootState, RootState["historyIndex"]>(
-    (state) => state.historyIndex
+    historyIndexSelector
   )
+
   const strokes = useSelector<RootState, RootState["strokes"]>(
-    (state: RootState) => state.strokes
+    strokesSelector
   )
 
   // if there is at least one point in the current stroke points array-drawing has started
@@ -87,7 +89,7 @@ export const App = () => {
   // mouse up and mouse out event handler-stop drawing when release the button, mouse leaves the canvas area
   const endDrawing = () => {
     if (isDrawing) {
-      dispatch(endStroke())
+      dispatch(endStroke(historyIndex, currentStroke))
     }
   }
 
