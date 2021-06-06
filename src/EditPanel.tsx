@@ -1,9 +1,11 @@
 import React from "react"
-import { useDispatch } from "react-redux"
-// import { undo, redo } from "./modules/historyIndex/actions"
+import { useDispatch, useSelector } from "react-redux"
+import { undo, redo } from "./modules/historyIndex/actions"
+import { strokesLengthSelector } from "./modules/strokes/selectors"
 
 export const EditPanel = () => {
     const dispatch = useDispatch()
+    const undoLimit = useSelector(strokesLengthSelector)
 
     return (
         <div className="window edit">
@@ -14,16 +16,16 @@ export const EditPanel = () => {
                 <div className="field-row">
                     <button
                         className="button redo"
-                        // onClick={() => dispatch(undo())}
+                        onClick={() => dispatch(undo(undoLimit))}
                     >
                         Undo
-    </button>
+                    </button>
                     <button
                         className="button undo"
-                        // onClick={() => dispatch(redo())}
+                        onClick={() => dispatch(redo())}
                     >
                         Redo
-    </button>
+                    </button>
                 </div>
             </div>
         </div>

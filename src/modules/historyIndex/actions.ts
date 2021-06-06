@@ -24,4 +24,3 @@ export const undo = (undoLimit: any) => {
 export const redo = () => {
   return { type: REDO }
 }
-export {}
