@@ -1,4 +1,4 @@
-import { Point } from "./types"
+import { Point } from "./utils/types"
 
 // it receives the context that it will use for drawing, the list of points for the current stroke and the stroke color
 export const drawStroke = (
@@ -15,7 +15,7 @@ export const drawStroke = (
   points.forEach((point) => {
     context.lineTo(point.x, point.y)
     context.stroke()
-  })
+  })                                                    
   context.closePath()
 }
 
