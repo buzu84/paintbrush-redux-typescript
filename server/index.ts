@@ -11,7 +11,7 @@ db.defaults({
   projects: [
     {
       id: nanoid(),
-      name: "Test Project",
+      name: "Test",
       image: "http://placekitten.com/100/100"
     }
   ]
@@ -36,10 +36,9 @@ interface Point {
 const app = express()
 
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json());
 
 const port = 4000
-
 
 app.get("/projects", (req, res) => {
   const data = db.get("projects").value()
