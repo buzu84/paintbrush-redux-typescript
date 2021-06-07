@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { beginStroke, endStroke, updateStroke } from './modules/currentStroke/actions'
 import { drawStroke, clearCanvas, setCanvasSize } from './canvasUtils'
@@ -8,13 +8,16 @@ import { EditPanel } from './EditPanel'
 import { historyIndexSelector } from './modules/historyIndex/selectors'
 import { currentStrokeSelector } from './modules/currentStroke/selectors'
 import { strokesSelector } from './modules/strokes/selectors'
+import useCanvas from './CanvasContext'
+import { FilePanel } from './shared/FilePanel'
 
 const WIDTH = 1024
 const HEIGHT = 768
 
 // pass null as the default value to the useRef hook, otherwise-type error stating that the ref prop of the canvas element does not accept undefined
 export const App = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  // const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef = useCanvas()
 
   const currentStroke = useSelector<RootState, RootState["currentStroke"]>(
     currentStrokeSelector
@@ -114,6 +117,7 @@ export const App = () => {
           <button aria-label="Close" />
         </div>
       </div>
+      <FilePanel />
       <canvas
         ref={canvasRef}
         onMouseDown={startDrawing}
