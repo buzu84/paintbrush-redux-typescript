@@ -1,4 +1,4 @@
-import { Point } from "./utils/types"
+import { Point } from "./types"
 
 // it receives the context that it will use for drawing, the list of points for the current stroke and the stroke color
 export const drawStroke = (
