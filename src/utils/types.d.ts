@@ -18,3 +18,10 @@ export type Point = {
   x: number
   y: number
 }
+
+export type Project = {
+  image: string;
+  name: string;
+  id: string
+}
+
