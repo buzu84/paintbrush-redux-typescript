@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { beginStroke, endStroke, updateStroke } from './modules/currentStroke/actions'
+import {
+  beginStroke,
+  updateStroke,
+} from './modules/currentStroke/slice'
+import { endStroke } from './modules/sharedActions'
 import { drawStroke, clearCanvas, setCanvasSize } from './canvasUtils'
 import { RootState } from './utils/types'
 import { ColorPanel } from './ColorPanel'
