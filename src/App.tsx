@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { beginStroke, endStroke, updateStroke } from './modules/currentStroke/actions'
 import { drawStroke, clearCanvas, setCanvasSize } from './canvasUtils'
-import { RootState } from './types'
+import { RootState } from './utils/types'
 import { ColorPanel } from './ColorPanel'
 import { EditPanel } from './EditPanel'
 import { historyIndexSelector } from './modules/historyIndex/selectors'
@@ -87,12 +87,12 @@ export const App = () => {
     nativeEvent
   }: React.MouseEvent<HTMLCanvasElement>) => {
     const { offsetX, offsetY } = nativeEvent
-    dispatch(beginStroke(offsetX, offsetY))
+    dispatch(beginStroke({x: offsetX, y: offsetY}))
   }
   // mouse up and mouse out event handler-stop drawing when release the button, mouse leaves the canvas area
   const endDrawing = () => {
     if (isDrawing) {
-      dispatch(endStroke(historyIndex, currentStroke))
+      dispatch(endStroke({ historyIndex, stroke: currentStroke }))
     }
   }
 
@@ -106,7 +106,7 @@ export const App = () => {
       return
     }
     const { offsetX, offsetY } = nativeEvent
-    dispatch(updateStroke(offsetX, offsetY))
+    dispatch(updateStroke({ x: offsetX, y: offsetY }))
   }
 
   return (
