@@ -83,7 +83,7 @@ export const App = () => {
         drawStroke(context, stroke.points, stroke.color)
       })
     })
-  }, [historyIndex])
+  }, [historyIndex, strokes])
 
 
   // mouse press event handler-make it dispatch the BEGIN_STROKE action.
