@@ -1,12 +1,17 @@
 import React from "react"
 import useCanvas from "../CanvasContext"
 import { saveAs } from "file-saver"
-import { getCanvasImage } from "../canvasUtils"
+import { getCanvasImage } from "../utils/canvasUtils"
+import { show } from "../modules/modals/slice"
+import { useDispatch } from "react-redux"
 
 
 // When the user clicks the button it will generate the Blob from the canvas and then save it to the disk using the file-saver package.
 export const FilePanel = () => {
   const canvasRef = useCanvas()
+
+  const dispatch = useDispatch()
+
   const exportToFile = async () => {
     const file = await getCanvasImage(canvasRef.current)
     if (!file) {
@@ -14,6 +19,7 @@ export const FilePanel = () => {
     }
     saveAs(file, "drawing.png")
   }
+
   return (
     <div className="window file">
       <div className="title-bar">
@@ -23,7 +29,24 @@ export const FilePanel = () => {
         <div className="field-row">
           <button className="save-button" onClick={exportToFile}>
             Export
-  </button>
+          </button>
+          <button
+            className="save-button"
+            onClick={() => {
+              dispatch(show("PROJECTS_SAVE_MODAL"))
+            }}
+          >
+            Save
+          </button>
+          <button
+            className="save-button"
+            onClick={() => {
+              dispatch(show("PROJECTS_MODAL"))
+            }}
+          >
+            Load
+          </button>
+
         </div>
       </div>
     </div>

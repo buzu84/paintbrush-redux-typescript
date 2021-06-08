@@ -4,11 +4,14 @@ import { Provider } from 'react-redux';
 import { store } from './store'
 import './index.css';
 import { App } from './App';
+import { CanvasProvider } from "./CanvasContext"
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <CanvasProvider>
+        <App />
+      </CanvasProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

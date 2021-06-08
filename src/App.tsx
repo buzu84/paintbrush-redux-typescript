@@ -5,15 +5,16 @@ import {
   updateStroke,
 } from './modules/currentStroke/slice'
 import { endStroke } from './modules/sharedActions'
-import { drawStroke, clearCanvas, setCanvasSize } from './canvasUtils'
+import { drawStroke, clearCanvas, setCanvasSize } from './utils/canvasUtils'
 import { RootState } from './utils/types'
-import { ColorPanel } from './ColorPanel'
-import { EditPanel } from './EditPanel'
+import { ColorPanel } from './shared/ColorPanel'
+import { EditPanel } from './shared/EditPanel'
 import { historyIndexSelector } from './modules/historyIndex/selectors'
 import { currentStrokeSelector } from './modules/currentStroke/selectors'
 import { strokesSelector } from './modules/strokes/selectors'
 import useCanvas from './CanvasContext'
 import { FilePanel } from './shared/FilePanel'
+import { ModalLayer } from './ModalLayer'
 
 const WIDTH = 1024
 const HEIGHT = 768
@@ -82,7 +83,7 @@ export const App = () => {
         drawStroke(context, stroke.points, stroke.color)
       })
     })
-  }, [historyIndex])
+  }, [historyIndex, strokes])
 
 
   // mouse press event handler-make it dispatch the BEGIN_STROKE action.
@@ -122,6 +123,7 @@ export const App = () => {
         </div>
       </div>
       <FilePanel />
+      <ModalLayer />
       <canvas
         ref={canvasRef}
         onMouseDown={startDrawing}
